@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const app = express();
 app.use(bodyParser.json());
+
 app.use(cors());
 
 const database = {
@@ -26,7 +27,7 @@ app.get("/", (req, res) => {
 });
 
 //* /sign in --> POST -> success/fail
-app.post("/signin", (req, res) => {
+app.post("/signin", cors(), (req, res) => {
   //get email from request body
   const email = req.body.email;
 
@@ -40,7 +41,7 @@ app.post("/signin", (req, res) => {
     email === database.users[0].email &&
     password === database.users[0].password
   ) {
-    res.json("signed in");
+    res.json("success");
   } else {
     res.status(400).json("error logging in");
   }
