@@ -41,7 +41,7 @@ app.post("/signin", cors(), (req, res) => {
     email === database.users[0].email &&
     password === database.users[0].password
   ) {
-    res.json("success");
+    res.json(database.users[0]);
   } else {
     res.status(400).json("error logging in");
   }
@@ -78,8 +78,8 @@ app.get("/profile/:Id", (req, res) => {
   }
 });
 
-//TODO /image --> PUT -> update user
-app.post("/image", (req, res) => {
+//* /image --> PUT -> update user
+app.put("/image", (req, res) => {
   const { id } = req.body;
 
   let found = false;
