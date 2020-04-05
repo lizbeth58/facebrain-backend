@@ -30,17 +30,27 @@ app.get("/", (req, res) => {
 });
 
 //* /sign in --> POST -> success/fail
-app.post("/signin", signin.handleSignin(db, bcrypt)(req, res));
+app.post("/signin", (req, res) => {
+  signin.handleSignin(req, res, db, bcrypt);
+});
 
 //* /register --> POST -> user object
-app.post("/register", register.handleRegister(db, bcrypt)(req, res));
+app.post("/register", (req, res) => {
+  register.handleRegister(req, res, db, bcrypt);
+});
 
 //* /profile/:userId --> GET = user object
-app.get("/profile:id", profile.handleProfile(db)(req, res));
+app.get("/profile:id", (req, res) => {
+  profile.handleProfile(req, res, db);
+});
 
 //* /image --> PUT -> update user
-app.put("/image", image.handleImage(db)(req, res));
-app.post("/imageurl", image.handleApiCall(req, res));
+app.put("/image", (req, res) => {
+  image.handleImage(req, res, db);
+});
+app.post("/imageurl", (req, res) => {
+  image.handleApiCall(req, res);
+});
 app.listen(3000, () => {
   console.log("app is running");
 });

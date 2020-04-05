@@ -7,13 +7,13 @@ const app = new Clarifai.App({
 
 const handleApiCall = (req, res) => {
   app.models
-    .predict(Clarifai.FACE_DETECT_MODEL, req, body.input)
+    .predict(Clarifai.FACE_DETECT_MODEL, req.body.input)
     .then((data) => {
       res.json(data).catch((err) => res.status(400).json("error"));
     });
 };
 
-const handleImage = (db) => (req, res) => {
+const handleImage = (req, res, db) => {
   const { id } = req.body;
   db("users")
     .where("id", "=", id)
